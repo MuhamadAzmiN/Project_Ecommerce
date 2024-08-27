@@ -27,6 +27,12 @@ Route::get('/detail', function() {
     return view('/detail');
 })->name('detail');
 
+
+Route::get('/service', function() {
+    return view('/service');
+})->name('service');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
