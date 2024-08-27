@@ -7,8 +7,8 @@
       <a href="" class="inline-block underline ml-2"> Tentang Kami</a>
     </p>
 </div>
-<nav class="bg-white shadow w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-50 pt-2">
+<nav class="flex flex-col bg-white shadow w-full z-50 ">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-50 pt-2 w-full">
       <div class="flex justify-between h-16 items-center">
         <!-- Mobile Menu Button -->
         
@@ -16,7 +16,6 @@
         <!-- Logo -->
         <a href="#" class="flex-shrink-0 flex justify-center items-center h-max">
           <img class="h-14 w-auto" src="https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/571c2d3473f3fa843f61e92f2dc20b23.png" alt="Logo">
-          <h3 class="font-extrabold ml-2 min-xl:block max-lg:hidden">SMK Wikrama Bogor</h3>
         </a>
   
         <!-- Search Bar -->
@@ -30,25 +29,45 @@
         <div class="flex items-center">
           <!-- Icons -->
           <div class="flex items-center space-x-4">
-            <a href="#" class="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0">
-                <svg class="h-5 w-5 text-gray-900"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-            </a>
-            <a href="#" class="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0">
-                <svg class="h-5 w-5 text-gray-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />  <path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
-            </a>
-            <a href="#" class="text-gray-500  hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0">
-                <svg class="h-5 w-5 text-gray-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M12 20l-3 -3h-2a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-2l-3 3" />  <line x1="8" y1="9" x2="16" y2="9" />  <line x1="8" y1="13" x2="14" y2="13" /></svg>
-            </a>
+            <div class="relative">
+                <button class="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0" id="cart-button">
+                    <svg class="h-5 w-5 text-gray-900"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </button>
+                <div class=" absolute w-80 h-48 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 " id="cart">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                </div>
+            </div>
+            <div class="relative">
+                <button href="#" class="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0" id="bell-button">
+                    <svg class="h-5 w-5 text-gray-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />  <path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                </button>
+                <div class=" absolute w-80 h-48 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 " id="bell">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                </div>
+            </div>
+            <div class="relative">
+                <button href="#" class="text-gray-500  hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0" id="message-button">
+                    <svg class="h-5 w-5 text-gray-900"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M12 20l-3 -3h-2a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-2l-3 3" />  <line x1="8" y1="9" x2="16" y2="9" />  <line x1="8" y1="13" x2="14" y2="13" /></svg>
+                </button>
+                <div class=" absolute w-80 h-48 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 " id="message">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                </div>
+            </div>
+            
           </div>
   
           <!-- Profile Dropdown -->
           <div class="ml-4 relative">
             <button class="flex items-center gap-1 text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 p-2 hover:bg-gray-400 duration-200 hover:bg-opacity-30" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                <svg class="h-8 w-8 text-gray-900"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+                <img src="{{ asset('/img/user.jpeg') }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
                 <p class="max-md:hidden">Muhammad Nur Rizky</p>
             </button>
             <!-- Dropdown -->
@@ -61,6 +80,18 @@
         </div>
       </div>
     </div>
+    <div class="w-full">
+        <div class="flex justify-start mx-auto items-center max-w-4xl px-10">
+            <div class="flex gap-7 w-full items-center justify-start max-sm:overflow-x-auto max-sm:p-2 mt-1 max-lg:justify-center max-sm:justify-start">
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Dashboard</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Cart</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+            </div>
+        </div>
+    </div>
+</nav>
   
   <script>
 
@@ -77,6 +108,45 @@
       if (!document.getElementById('user-menu-button').contains(target) && !document.getElementById('dropdown-menu').contains(target)) {
         document.getElementById('dropdown-menu').classList.add('hidden');
       }
+    });
+
+    // Toggle cart
+    document.getElementById('cart-button').addEventListener('click', function () {
+        var cart = document.getElementById('cart');
+        cart.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function (a) {
+        var cart = a.target;
+        if (!document.getElementById('cart-button').contains(cart) && !document.getElementById('cart').contains(cart)) {
+            document.getElementById('cart').classList.add('hidden');
+        }
+    });
+
+    // toggle bell
+    document.getElementById("bell-button").addEventListener("click", function () {
+        var bell = document.getElementById("bell");
+        bell.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (b) {
+        var bell = b.target;
+        if (!document.getElementById("bell-button").contains(bell) && !document.getElementById("bell").contains(bell)) {
+            document.getElementById("bell").classList.add("hidden");
+        }
+    });
+
+    // Toggle message
+    document.getElementById("message-button").addEventListener("click", function () {
+        var message = document.getElementById("message");
+        message.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (c) {
+        var message = c.target;
+        if (!document.getElementById("message-button").contains(message) && !document.getElementById("message").contains(message)) {
+            document.getElementById("message").classList.add("hidden");
+        }
     });
   </script>
   
