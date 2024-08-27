@@ -67,14 +67,31 @@
           <!-- Profile Dropdown -->
           <div class="ml-4 relative">
             <button class="flex items-center gap-1 text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 p-2 hover:bg-gray-400 duration-200 hover:bg-opacity-30" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+
+                @if (auth()->user())
+                <img src="{{ asset('/img/user.jpeg') }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
+                <p class="max-md:hidden">{{ auth()->user()->name }}</p>
+                @else 
+                <p class="max-md:hidden"><a href="/login">Login</a></p>
+                @endif
+
                 <img src="{{ asset('/img/user.jpeg') }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
                 <p class="max-md:hidden">Muhammad Nur Rizky</p>
             </button>
             <!-- Dropdown -->
             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden z-50" id="dropdown-menu">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+              <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                
+                {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a> --}}
+                <x-dropdown-link :href="route('logout')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-dropdown-link>
+            </form>
             </div>
           </div>
         </div>
@@ -83,11 +100,21 @@
     <div class="w-full">
         <div class="flex justify-start mx-auto items-center max-w-4xl px-10">
             <div class="flex gap-7 w-full items-center justify-start max-sm:overflow-x-auto max-sm:p-2 mt-1 max-lg:justify-center max-sm:justify-start">
+              <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Dashboard') }}
+            </x-nav-link>
+                {{-- <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Dashboard</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Cart</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+                <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button> --}}
+=======
                 <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Dashboard</button>
                 <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Cart</button>
                 <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
                 <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
                 <button class="text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">Notification</button>
+
             </div>
         </div>
     </div>
@@ -153,10 +180,6 @@
   
   
   
-
-
-
-  {{--NAV LAMA >>>>  --}}
 
 
 {{-- <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
