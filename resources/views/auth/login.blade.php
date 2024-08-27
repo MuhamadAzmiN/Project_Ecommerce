@@ -8,13 +8,16 @@
         <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
                 <div class="absolute inset-0">
-                    <img class="object-cover object-top w-full h-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/signin/4/girl-thinking.jpg" alt="" />
+                    <img class="object-cover object-top w-full h-full" src="https://smkwikrama.sch.id/assets2/grid3.png" alt="" />
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
     
                 <div class="relative">
                     <div class="w-full max-w-xl xl:w-full xl:mx-auto xl:pr-24 xl:max-w-xl">
-                        <h3 class="text-4xl font-bold text-white">Join 35k+ web professionals & <br class="hidden xl:block" />build your website</h3>
+                        <h3 class="text-4xl font-bold text-white">
+                            Bergabunglah dengan 35k+ profesional web dan <br class="hidden xl:block" />
+                            bangun website e-commerce SMK Wikrama Bogor
+                        </h3>
                         <!-- Some content here -->
                     </div>
                 </div>

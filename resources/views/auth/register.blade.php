@@ -53,7 +53,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
                 <div class="absolute inset-0">
-                    <img class="object-cover w-full h-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/signup/4/girl-working-on-laptop.jpg" alt="" />
+                    <img class="object-cover w-full h-full" src="https://smkwikrama.sch.id/storage/1701159048-berita$berita.JPG" alt="" />
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
     

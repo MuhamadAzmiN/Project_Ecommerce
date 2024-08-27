@@ -14,12 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-
         // data azmi
         \App\Models\User::factory()->create([
-            'name' => 'Azmi',
-            'email' => 'azmi89017@gmail.com',
-            'password' => bcrypt('password')
+            "name" => "azmi",
+            "email" => "azmi@gmail.com",
+            "password" => bcrypt('password')
+            
         ]);
+
+
+        $this->call(BarangSeeder::class);
     }
 }
