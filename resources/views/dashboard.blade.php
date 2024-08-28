@@ -131,7 +131,7 @@
                     <div class="flex items-start justify-between mt-4 space-x-4">
                         <div>
                             <h3 class="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                                <a href="#" title="">
+                                <a href="/detail/{{ $item->id }}" title="">
                                     {{ $item->nama_barang }}
                                     <span class="absolute inset-0" aria-hidden="true"></span>
                                 </a>

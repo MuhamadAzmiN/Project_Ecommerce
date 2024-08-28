@@ -18,6 +18,16 @@ class BarangController extends Controller
         ]);
     }
 
+
+
+    public function detail($id){
+        $barang = barang::find($id);
+         return view('detail',[
+        "title" => "halaman detail",
+        "barang" => $barang
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

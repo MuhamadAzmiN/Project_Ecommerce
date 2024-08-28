@@ -16,18 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('/dashboard');
-});
+// Route::get('/', function () {
+//     return view('/dashboard', [
+//         "barang" => barang::all()
+//     ]);
+// });
 
 
 Route::get('/cart', function() {
     return view('/cart');
 })->name('cart');
 
-Route::get('/detail', function() {
-    return view('/detail');
-})->name('detail');
+Route::get('/detail/{id}', [BarangController::class, 'detail'])->name('detail');
+
 
 
 Route::get('/service', function() {
@@ -35,7 +36,7 @@ Route::get('/service', function() {
 })->name('service');
 
 
-Route::get('/dashboard', [BarangController::class, 'index'] )->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [BarangController::class, 'index'] )->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

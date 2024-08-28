@@ -19,11 +19,15 @@
         </a>
   
         <!-- Search Bar -->
-        <div class="flex-1 flex items-center justify-center">
-          <div class="w-full max-w-lg max-lg:mx-2">
-            <input type="text" class="form-input w-full rounded-full border-gray-300 px-4 py-2" placeholder="Cari di sini ......">
-          </div>
-        </div>
+        {{-- <div class="flex-1 flex items-center justify-center">
+            <div class="w-full max-w-lg max-lg:mx-2">
+                <input id="searchInput" type="text" class="form-input w-full rounded-full border-gray-300 px-4 py-2" placeholder="Cari di sini ......">
+            </div>
+        </div> --}}
+        
+        <!-- Modal -->
+        
+        <livewire:search-items/>
   
         <!-- Icons and Profile -->
         <div class="flex items-center">
@@ -110,6 +114,28 @@
   
   <script>
 
+document.getElementById('searchInput').addEventListener('input', function(event) {
+    const searchTerm = event.target.value.trim();
+    const modal = document.getElementById('searchModal');
+    
+    if (searchTerm.length > 0) {
+        // const results = `<p>Hasil pencarian untuk "${searchTerm}"...</p>`;
+        // document.getElementById('searchResults').innerHTML = results;
+        
+        // Tampilkan modal
+        modal.classList.remove('hidden');
+    } else {
+        // Sembunyikan modal jika input kosong
+        modal.classList.add('hidden');
+    }
+});
+
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('searchModal').classList.add('hidden');
+    });
+
+
   
     // Toggle profile dropdown on button click
     document.getElementById('user-menu-button').addEventListener('click', function () {
@@ -163,6 +189,9 @@
             document.getElementById("message").classList.add("hidden");
         }
     });
+
+
+   
   </script>
   
   
