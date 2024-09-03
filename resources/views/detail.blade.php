@@ -1,7 +1,165 @@
 <x-app-layout>
     <x-slot name="header">
+        @if(session('success'))
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil Memasukan Ke Cart',
+                text: 'Selamat Datang {{ auth()->user()->name }}',
+                confirmButtonText: 'Ok'
+            });
+        </script>
+        @else 
+
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+        </script>
+        @endif
     </x-slot>
-    <h1>{{ $barang->nama_barang }}</h1>
-    <img src="{{ $barang->image }}" alt="">
+    
+    <section class="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
+        <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
+                <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
+                    <img class="w-full h-96 object-cover dark:hidden" src="{{ $barang->image }}" alt="iMac front view" />
+                    <img class="w-full h-96 object-cover hidden dark:block" src="{{ $barang->image }}" alt="iMac front view dark mode" />
+                </div>
+                
+                <div class="mt-6 sm:mt-8 lg:mt-0">
+                    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+                        {{ $barang->nama_barang }}
+                    </h1>
+    
+                    <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
+                        <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
+                            Rp {{ number_format($barang->harga, 0, ',', '.') }}
+                        </p>
+    
+                        <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                            <div class="flex items-center gap-1">
+                                <!-- Ratings -->
+                                @for ($i = 0; $i < 5; $i++)
+                                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"/>
+                                </svg>
+                                @endfor
+                            </div>
+                            <p class="text-sm font-medium leading-none text-gray-500 dark:text-gray-400">(5.0)</p>
+                            <a href="#" class="text-sm font-medium leading-none text-gray-900 underline hover:no-underline dark:text-white">
+                                {{-- 345 Reviews --}}
+                            </a>
+                        </div>
+                    </div>
+    
+                    <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+                        <a href="#" title="Add to favorites" class="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                            </svg>
+                            Add to favorites
+                        </a>
+    
+                        <form action="{{ route('cart.add', $barang->id) }}" method="POST" class="sm:flex sm:items-center">
+                            @csrf
+                            <div class="flex items-center mt-4 sm:mt-0">
+                                <input type="number" name="quantity" value="1" min="1" class="w-16 py-2.5 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700 mr-3" />
+                            </div>
+                            <button type="submit" class="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"/>
+                                </svg>
+                                Add to cart
+                            </button>
+                        </form>
+                    </div>
+    
+                    <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+    
+                    <p class="mb-6 text-gray-500 dark:text-gray-400">
+                        Studio quality three mic array for crystal clear calls and voice recordings. Six-speaker sound system for a remarkably robust and high-quality audio experience. Up to 256GB of ultrafast SSD storage.
+                    </p>
+    
+                    <p class="text-gray-500 dark:text-gray-400">
+                        Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse with Magic Keyboard or Magic Keyboard with Touch ID.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-12 bg-white sm:py-16 lg:py-20">
+        <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+           
+    
+            <div class="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
+
+                @foreach ($semua_barang as $item)
+                <div class="relative group">
+                    <div class="w-64 h-64 overflow-hidden">
+                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="{{ $item->image }}" alt="Gambar Produk" />
+                    </div>
+                    <div class="absolute left-3 top-3">
+                        <p class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-white rounded-full">New</p>
+                    </div>
+                    <div class="flex items-start justify-between mt-4 space-x-4">
+                        <div>
+                            <h3 class="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
+                                <a href="/detail/{{ $item->id }}" title="">
+                                    {{ $item->nama_barang }}
+                                    <span class="absolute inset-0" aria-hidden="true"></span>
+                                </a>
+                                
+                            </h3>
+                            <div class="flex items-center mt-2.5 space-x-px">
+                                <svg class="w-3 h-3 text-yellow-400 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-3 h-3 text-yellow-400 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-3 h-3 text-yellow-400 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-3 h-3 text-yellow-400 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-3 h-3 text-gray-300 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <p class="text-xs font-bold text-gray-900 sm:text-sm ">
+                            Rp {{   number_format($item->harga, 0, ',', '.') }}
+                        </p>
+                        <div class="text-right">
+                            
+                        </div>
+                    </div>
+                </div>
+                        
+                @endforeach
+    
+               
+    
+    
+    </section>
+ 
 </x-app-layout>

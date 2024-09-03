@@ -24,7 +24,8 @@ class BarangController extends Controller
         $barang = barang::find($id);
          return view('detail',[
         "title" => "halaman detail",
-        "barang" => $barang
+        "barang" => $barang,
+        "semua_barang" => barang::paginate(4)
         ]);
     }
 

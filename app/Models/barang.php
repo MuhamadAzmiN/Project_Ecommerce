@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class barang extends Model
+class Barang extends Model
 {
     use HasFactory;
-    protected $guarded = ["id"];
-    
+    protected $guarded = ['id'];
+
+    // Relasi dengan model Pesanan
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class, 'barang_id');
+    }
 }

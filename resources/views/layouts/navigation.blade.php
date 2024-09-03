@@ -113,82 +113,82 @@
 </nav>
   
   <script>
+      // Toggle profile dropdown on button click
+      document.getElementById('user-menu-button').addEventListener('click', function () {
+        var dropdown = document.getElementById('dropdown-menu');
+        dropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown if clicked outside
+      document.addEventListener('click', function (e) {
+        var target = e.target;
+        if (!document.getElementById('user-menu-button').contains(target) && !document.getElementById('dropdown-menu').contains(target)) {
+          document.getElementById('dropdown-menu').classList.add('hidden');
+        }
+      });
+      
+      // Toggle cart
+      document.getElementById('cart-button').addEventListener('click', function () {
+          var cart = document.getElementById('cart');
+          cart.classList.toggle('hidden');
+      });
+      
+      document.addEventListener('click', function (a) {
+          var cart = a.target;
+          if (!document.getElementById('cart-button').contains(cart) && !document.getElementById('cart').contains(cart)) {
+              document.getElementById('cart').classList.add('hidden');
+          }
+      });
+      
+      // toggle bell
+      document.getElementById("bell-button").addEventListener("click", function () {
+          var bell = document.getElementById("bell");
+          bell.classList.toggle("hidden");
+      });
+      
+      document.addEventListener("click", function (b) {
+          var bell = b.target;
+          if (!document.getElementById("bell-button").contains(bell) && !document.getElementById("bell").contains(bell)) {
+              document.getElementById("bell").classList.add("hidden");
+          }
+      });
+      
+      // Toggle message
+      document.getElementById("message-button").addEventListener("click", function () {
+          var message = document.getElementById("message");
+          message.classList.toggle("hidden");
+      });
+      
+      document.addEventListener("click", function (c) {
+          var message = c.target;
+          if (!document.getElementById("message-button").contains(message) && !document.getElementById("message").contains(message)) {
+              document.getElementById("message").classList.add("hidden");
+          }
+      });
 
-document.getElementById('searchInput').addEventListener('input', function(event) {
-    const searchTerm = event.target.value.trim();
-    const modal = document.getElementById('searchModal');
-    
-    if (searchTerm.length > 0) {
-        // const results = `<p>Hasil pencarian untuk "${searchTerm}"...</p>`;
-        // document.getElementById('searchResults').innerHTML = results;
-        
-        // Tampilkan modal
-        modal.classList.remove('hidden');
-    } else {
-        // Sembunyikan modal jika input kosong
-        modal.classList.add('hidden');
-    }
-});
+        // document.getElementById('searchInput').addEventListener('input', function(event) {
+        //     const searchTerm = event.target.value.trim();
+        //     const modal = document.getElementById('searchModal');
+            
+        //     if (searchTerm.length > 0) {
+        //         // const results = `<p>Hasil pencarian untuk "${searchTerm}"...</p>`;
+        //         // document.getElementById('searchResults').innerHTML = results;
+                
+        //         // Tampilkan modal
+        //         modal.classList.remove('hidden');
+        //     } else {
+        //         // Sembunyikan modal jika input kosong
+        //         // modal.classList.add('hidden');
+        //     }
+        // });
 
 
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('searchModal').classList.add('hidden');
-    });
+    // document.getElementById('closeModal').addEventListener('click', function() {
+    //     document.getElementById('searchModal').classList.add('hidden');
+    // });
 
 
   
-    // Toggle profile dropdown on button click
-    document.getElementById('user-menu-button').addEventListener('click', function () {
-      var dropdown = document.getElementById('dropdown-menu');
-      dropdown.classList.toggle('hidden');
-    });
-  
-    // Close dropdown if clicked outside
-    document.addEventListener('click', function (e) {
-      var target = e.target;
-      if (!document.getElementById('user-menu-button').contains(target) && !document.getElementById('dropdown-menu').contains(target)) {
-        document.getElementById('dropdown-menu').classList.add('hidden');
-      }
-    });
-
-    // Toggle cart
-    document.getElementById('cart-button').addEventListener('click', function () {
-        var cart = document.getElementById('cart');
-        cart.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', function (a) {
-        var cart = a.target;
-        if (!document.getElementById('cart-button').contains(cart) && !document.getElementById('cart').contains(cart)) {
-            document.getElementById('cart').classList.add('hidden');
-        }
-    });
-
-    // toggle bell
-    document.getElementById("bell-button").addEventListener("click", function () {
-        var bell = document.getElementById("bell");
-        bell.classList.toggle("hidden");
-    });
-
-    document.addEventListener("click", function (b) {
-        var bell = b.target;
-        if (!document.getElementById("bell-button").contains(bell) && !document.getElementById("bell").contains(bell)) {
-            document.getElementById("bell").classList.add("hidden");
-        }
-    });
-
-    // Toggle message
-    document.getElementById("message-button").addEventListener("click", function () {
-        var message = document.getElementById("message");
-        message.classList.toggle("hidden");
-    });
-
-    document.addEventListener("click", function (c) {
-        var message = c.target;
-        if (!document.getElementById("message-button").contains(message) && !document.getElementById("message").contains(message)) {
-            document.getElementById("message").classList.add("hidden");
-        }
-    });
 
 
    

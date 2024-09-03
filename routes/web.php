@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 use App\Models\barang;
 use Illuminate\Support\Facades\Route;
 
@@ -22,18 +23,17 @@ use Illuminate\Support\Facades\Route;
 //     ]);
 // });
 
-
-Route::get('/cart', function() {
-    return view('/cart');
-})->name('cart');
-
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/detail/{id}', [BarangController::class, 'detail'])->name('detail');
+Route::post('/cart/{barang}', [CartController::class, 'addToCart'])->name('cart.add');
 
 
 
 Route::get('/service', function() {
     return view('/service');
 })->name('service');
+
+Route::get('/', [BarangController::class, 'index'])->name('dashboard');
 
 
 Route::get('/dashboard', [BarangController::class, 'index'] )->name('dashboard');
