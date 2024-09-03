@@ -20,3 +20,8 @@
 </a>
 
 
+<a href="{{ route('service') }}" class="{{ request()->is('service') ? $active : $NonActive }} text-sm hover:bg-sky-300 hover:bg-opacity-35 rounded-t-md py-1 px-2 duration-200 shadow-sm p-0 max-sm:border-r max-sm:border-b-0 max-sm:border-gray-200 max-sm:rounded-e-none">
+    Services
+</a>
+
+

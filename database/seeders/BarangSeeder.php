@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Barang;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +13,7 @@ class BarangSeeder extends Seeder
      */
     public function run(): void
     {
+        $barang = Barang::all();
         DB::table('barangs')->insert([
             [
                 'nama_barang' => 'Pizza Margherita',
@@ -21,6 +23,8 @@ class BarangSeeder extends Seeder
                 'keterangan' => 'Pizza klasik dengan saus tomat dan keju mozzarella',
                 'created_at' => now(),
                 'updated_at' => now(),
+                
+            
             ],
             [
                 'nama_barang' => 'Sushi Salmon',

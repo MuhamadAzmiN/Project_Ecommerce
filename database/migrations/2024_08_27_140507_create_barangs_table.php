@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nama_barang');
+            // $table->string('slug')->unique();
             $table->integer('harga');
             $table->string('image');
             $table->boolean('is_ready')->default(true);
             $table->string('keterangan');
+            
             
         });
     }

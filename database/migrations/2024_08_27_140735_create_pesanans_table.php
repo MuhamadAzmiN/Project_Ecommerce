@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->date('tanggal');
-            $table->string('status')->default(0);
+            $table->string('status')->default('pending');
             $table->integer('jumlah_harga');
-
+            $table->integer('jumlah_barang');
+            $table->unsignedBigInteger('barang_id'); // Pastikan tipe dan nama kolom sesuai
         });
     }
 
