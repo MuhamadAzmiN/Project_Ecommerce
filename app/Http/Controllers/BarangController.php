@@ -13,21 +13,28 @@ class BarangController extends Controller
      */
     public function index()
     {
+        $title = "halaman dashboard";
         return view('/dashboard', [
+            'title' => $title,
             "barang" => barang::all()
         ]);
     }
+
+    
 
 
 
     public function detail($id){
         $barang = barang::find($id);
+        // dd($barang->harga * 2);
          return view('detail',[
         "title" => "halaman detail",
         "barang" => $barang,
         "semua_barang" => barang::paginate(4)
         ]);
     }
+
+        
 
     /**
      * Show the form for creating a new resource.

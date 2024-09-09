@@ -19,5 +19,7 @@ class pesanan extends Model
     {   
         return $this->belongsTo(barang::class, 'barang_id');
     }
+
+    
     
 }

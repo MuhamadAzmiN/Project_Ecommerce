@@ -51,7 +51,7 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
-        Session::flash('success', 'login berhasil');
+        Session::flash('success', 'Login Successful');
     }
 
     /**
@@ -84,4 +84,8 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
+
+
+
+
 }

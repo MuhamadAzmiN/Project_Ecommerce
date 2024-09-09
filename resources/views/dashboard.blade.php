@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Dashboard Page">
     
     <x-slot name="header">
         {{-- <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -25,6 +25,7 @@
 
        
         @endif
+       
         @if (session('success'))
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
@@ -252,7 +253,7 @@
       
                   <h4 class="sr-only">Available colors</h4>
                   <ul role="list" class="mt-auto flex items-center justify-center space-x-3 pt-6">
-                    <li class="h-4 w-4 rounded-full border border-black border-opacity-10" style="background-color: #111827">
+                      <li class="h-4 w-4 rounded-full border border-black border-opacity-10" style="background-color: #111827">
                       <span class="sr-only">Black</span>
                     </li>
                     <li class="h-4 w-4 rounded-full border border-black border-opacity-10" style="background-color: #fde68a">
@@ -263,7 +264,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="inline-flex w-64 flex-col text-center lg:w-auto">
+                     <li class="inline-flex w-64 flex-col text-center lg:w-auto">
                   <div class="group relative">
                     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200">
                       <img src="https://m.media-amazon.com/images/I/61bG3pY7k-L.jpg" alt="Black machined steel pen with hexagonal grip and small white logo at top." class="h-full w-full object-cover object-center group-hover:opacity-75">
@@ -281,6 +282,8 @@
                     </div>
                   </div>
       
+
+      
                   <h4 class="sr-only">Available colors</h4>
                   <ul role="list" class="mt-auto flex items-center justify-center space-x-3 pt-6">
                     <li class="h-4 w-4 rounded-full border border-black border-opacity-10" style="background-color: #111827">
@@ -340,6 +343,9 @@
                       <p class="mt-1 text-gray-900">Rp 5.000</p>
                     </div>
                   </div>
+
+
+                  
       
                   <h4 class="sr-only">Available colors</h4>
                   <ul role="list" class="mt-auto flex items-center justify-center space-x-3 pt-6">

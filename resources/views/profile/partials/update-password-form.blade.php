@@ -8,7 +8,7 @@
             {{ __('Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
-
+    
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
@@ -43,6 +43,9 @@
                     class="text-sm text-gray-600 dark:text-gray-400"
                 >{{ __('Saved.') }}</p>
             @endif
+        </div>
+        <div>
+            
         </div>
     </form>
 </section>
