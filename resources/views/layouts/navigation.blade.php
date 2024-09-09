@@ -39,11 +39,15 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                 </button>
-                <div class=" absolute w-80 h-48 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 " id="cart">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tes tes</a>
+                <div class="absolute w-80 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 max-h-96 overflow-y-auto" id="cart">
+                    @foreach ($barang_pesanan as $item)
+                    <div class="flex items-center mb-2">
+                        <img class="w-10 h-10 mr-4" src="{{ $item->barang->image }}" alt="{{ $item->barang->nama_barang }}">
+                        <a href="#" class="block text-sm text-gray-700 hover:bg-gray-100">{{ $item->barang->nama_barang }}</a>
+                    </div>
+                    @endforeach
                 </div>
+                
             </div>
             <div class="relative">
                 <button href="#" class="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-400 rounded-full duration-200 hover:bg-opacity-30 max-md:p-0" id="bell-button">

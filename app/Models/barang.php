@@ -15,4 +15,11 @@ class Barang extends Model
     {
         return $this->hasMany(Pesanan::class, 'barang_id');
     }
+
+    public function riwayatPesanans()
+    {
+        return $this->hasMany(RiwayatPesanan::class);
+    }
+
+
 }

@@ -7,7 +7,8 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        './node_modules/flowbite/**/*.js'  // Pastikan Flowbite ditambahkan di sini
+        './node_modules/flowbite/**/*.js',
+        './node_modules/tailgrids/**/*.js'  // Pastikan Flowbite ditambahkan di sini
     ],
 
     theme: {
@@ -37,6 +38,7 @@ export default {
 
     plugins: [
         forms,
-        require('flowbite/plugin')
+        require('flowbite/plugin'),
+        require('tailgrids/plugin')
     ],
 };
