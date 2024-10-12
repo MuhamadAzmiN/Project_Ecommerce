@@ -23,17 +23,20 @@
 <script>
     Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "{{ session('danger') }}",
+        title: '{{ session('success') }}',
         // footer: '<a href="#">Why do I have this issue?</a>'
     });
 </script>
 @endif
 
 
+
+
+
 <section
 class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
 <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
+    
     <div class="grid grid-cols-12">
         <div
             class="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
@@ -41,15 +44,27 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
                 <h2 class="font-manrope font-bold text-3xl leading-10 text-black">Shopping Cart</h2>
                 <h2 class="font-manrope font-bold text-xl leading-8 text-gray-600">{{ $jumlah_pesanan }} Items</h2>
             </div>
+            @if (session('danger'))
+                
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Gagal!</strong>
+                <span class="block sm:inline">{{ session('danger')  }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-red-500 cursor-pointer" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none';">
+                        <title>Close</title>
+                        <path d="M10 9l-1.4-1.4L6.2 10l1.4 1.4L10 11l1.4 1.4 1.4-1.4-1.4-1.4L10 9z"/>
+                    </svg>
+                </span>
+            </div>
+            @endif
+            
             <div class="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200">
                 <div class="col-span-12 md:col-span-7">
                     <p class="font-normal text-lg leading-8 text-gray-400">Product Details</p>
                 </div>
                 <div class="col-span-12 md:col-span-5">
                     <div class="grid grid-cols-5">
-                        <div class="col-span-3">
-                            <p class="font-normal text-lg leading-8 text-gray-400 text-center">Quantity</p>
-                        </div>
+                       
                         <div class="col-span-2">
                             <p class="font-normal text-lg leading-8 text-gray-400 text-center">Total</p>
                         </div>
@@ -72,44 +87,10 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
                             <h6 class="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600"> {{ $item->barang->nama_barang }} </h6>
                         </div>
                     </div>
-                    <div class="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
-                        <div class="flex items-center h-full">
-                            <button
-                                class="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
-                                    xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                    viewBox="0 0 22 22" fill="none">
-                                    <path d="M16.5 11H5.5" stroke="" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                </svg>
-                            </button>
-                            <input type="text"
-                                class="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent"
-                                placeholder="{{ $item->jumlah_barang }}">
-                                
-                            <button
-                                class="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
-                                    xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                    viewBox="0 0 22 22" fill="none">
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-opacity="0.2"
-                                        stroke-width="1.6" stroke-linecap="round" />
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-opacity="0.2"
-                                        stroke-width="1.6" stroke-linecap="round" />
-                                </svg>
-                            </button>
-                        </div>
-                       
-                    </div>
-                    <div class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
+                  
+                 
                         <p class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">Rp.{{ number_format($item->jumlah_harga, 0, ',', '.') }}</p>
-                    </div>
+                   
                 </div>
             </div>
             @endforeach
@@ -136,12 +117,10 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
                     </label>
                     <div class="flex pb-6">
                         <div class="relative w-full">
-                            <div class=" absolute left-0 top-0 py-3 px-4">
-                                <span class="font-normal text-base text-gray-300">Second Delivery</span>
-                            </div>
+                           
                             <input type="text" name="uang"
-                                class="block w-full h-11 pr-10 pl-36 min-[500px]:pl-52 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400"
-                                placehol    der="$5.00 required">
+                                class="block  text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400"
+                                placeholder="Rp.{{ number_format($total_jumlah_keseluruhan, 0, ',', '.') }}">
                            
                             <div id="dropdown-delivery" aria-labelledby="dropdown-delivery"
                                 class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-10 bg-white right-0">
@@ -248,8 +227,11 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
                         </div>
                     </div>
                     <!-- Modal Footer -->
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <livewire:cart-checkout/>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse items-center">
+                       <button @click="isOpen = false; $wire.hapusPesananSetelahCheckout()" 
+                       class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm mt-4">
+                       Tutup
+                   </button>
                        
                         <button @click="isOpen = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm">
                             Lihat Pesanan Saya
@@ -259,5 +241,10 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
             </div>
         </div>
     </div>
+
+
+    <script>
+        
+    </script>
 
 </x-app-layout>

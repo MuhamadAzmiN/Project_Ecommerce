@@ -38,11 +38,12 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+    
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
-        return redirect('/login');
+    
+        // Redirect ke URL logout Google
+        return redirect('https://accounts.google.com/Logout')->with('message', 'You have successfully logged out.');
     }
+    
 }

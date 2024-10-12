@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->string('image');
             $table->boolean('is_ready')->default(true);
-            $table->string('keterangan');
+            $table->longText('keterangan');
             
             
         });

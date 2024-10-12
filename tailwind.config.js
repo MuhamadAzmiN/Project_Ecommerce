@@ -8,7 +8,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './node_modules/flowbite/**/*.js',
-        './node_modules/tailgrids/**/*.js'  // Pastikan Flowbite ditambahkan di sini
+        './node_modules/tailgrids/**/*.js',
+        'node_modules/preline/dist/*.js'  // Pastikan Flowbite ditambahkan di sini
     ],
 
     theme: {
@@ -39,6 +40,7 @@ export default {
     plugins: [
         forms,
         require('flowbite/plugin'),
-        require('tailgrids/plugin')
+        require('tailgrids/plugin'),
+        require('preline/plugin')
     ],
 };

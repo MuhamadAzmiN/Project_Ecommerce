@@ -9,6 +9,7 @@ class SearchItems extends Component
 {
 
     public $cari = ''; 
+
     public function render()
     {
         $products = barang::where('nama_barang', 'like', '%' . $this->cari . '%')

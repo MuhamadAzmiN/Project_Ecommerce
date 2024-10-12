@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
+
     public function info()
     {
         $riwayatPembelian = RiwayatPesanan::with('barang')

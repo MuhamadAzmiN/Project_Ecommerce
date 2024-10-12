@@ -31,4 +31,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_CLIENT_REDIRECT'),
+    ],
+
+    'google' => [
+        'client_id' => '732991157520-7g2lkp8jnv4o2hrmpgt4ck4ke5ei2afc.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost:8000/login/google/callback',
+    ],
+
 ];
