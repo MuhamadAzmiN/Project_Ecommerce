@@ -38,6 +38,15 @@
                     <svg class="h-5 w-5 text-gray-900"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
+
+                    @if($barang_pesanan->count() > 0)
+                    <span class="absolute top-0 right-0 -mt-1 -mr-1">
+                        <div class="inline-flex items-center justify-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                            {{ $barang_pesanan->count()  }}
+                        </div>
+                    </span>
+                        
+                    @endif
                 </button>
                 <div class="absolute w-80 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 max-h-96 overflow-y-auto" id="cart">
                     @foreach ($barang_pesanan as $item)
@@ -66,36 +75,42 @@
           <!-- Profile Dropdown -->
           <div class="ml-4 relative">
             <a class="flex items-center gap-1 text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 p-2 hover:bg-gray-400 duration-200 hover:bg-opacity-30" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-
-                @if (auth()->user())
-
-                @if(auth()->user()->images !== null)
-                    <img src="{{ asset('images/' . auth('web')->user()->images) }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
-                @else 
-                <img src="{{ asset('/img/user.jpeg') }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
+                @php
+                    $user = auth()->user();
+                @endphp
+        
+                @if ($user)
+                    @if ($user->images)
+                        <img src="{{ asset('images/' . $user->images) }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
+                    @else 
+                        <img src="{{ asset('/img/user.jpeg') }}" class="w-9 h-9 rounded-full mr-2 shadow-md">
+                    @endif
+                    <p class="max-md:hidden">{{ $user->name }}</p>
                 @endif
-                <p class="max-md:hidden">{{ auth()->user()->name }}</p>
-                @else 
-                <p class="max-md:hidden"><a href="/login">Login</a></p>
-                @endif
-
             </a>
-            <!-- Dropdown -->
-            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden z-50" id="dropdown-menu">
-              <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                
-                {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a> --}}
-                <x-dropdown-link :href="route('logout')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-dropdown-link>
-            </form>
-            </div>
-          </div>
+        
+            @if ($user) <!-- Cek apakah ada user yang login -->
+                <!-- Dropdown -->
+                <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden z-50" id="dropdown-menu">
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
+                </div>
+            @endif
+        </div>
+
+        @if(!auth()->user())
+          
+        <a href="/login">Login</a>
+        @endif
+        
+        
         </div>
       </div>
     </div>
@@ -128,10 +143,10 @@
       });
       
       // Toggle cart
-      // document.getElementById('cart-button').addEventListener('click', function () {
-      //     var cart = document.getElementById('cart');
-      //     cart.classList.toggle('hidden');
-      // });
+      document.getElementById('cart-button').addEventListener('click', function () {
+          var cart = document.getElementById('cart');
+          cart.classList.toggle('hidden');
+      });
       
     
 

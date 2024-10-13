@@ -81,7 +81,7 @@ class BarangSeeder extends Seeder
             [
                 'nama_barang' => 'Crepes Suzette',
                 'harga' => 95000,
-                'image' => 'https://encrypted-tbn0.gst atic.com/images?q=tbn:ANd9GcRNZzY4RE0N1EnjV5JrcUdMoAg8eM3D_w8DVg&s',
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNZzY4RE0N1EnjV5JrcUdMoAg8eM3D_w8DVg&s',
                 'is_ready' => false,
                 'keterangan' => 'Crepes Suzette adalah hidangan pencuci mulut klasik asal Prancis yang terdiri dari crepes tipis yang disajikan dengan saus jeruk manis yang dibuat dari jus jeruk segar, gula, dan sedikit Grand Marnier atau likuor lainnya. Disajikan hangat dengan aroma jeruk yang segar, hidangan ini merupakan pilihan yang sempurna untuk mengakhiri makan malam dengan manis dan elegan.',
                 'created_at' => now(),

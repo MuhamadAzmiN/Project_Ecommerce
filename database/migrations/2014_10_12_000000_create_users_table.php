@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('google_id')->unique()->nullable()->default(null);
-            $table->string('email')->unique();
+            $table->string('github_id')->unique()->nullable()->default(null);
+            $table->string('email')->unique()->default(null);
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('role', ["admin", "users"])->nullable()->default('users');
+            $table->enum('role', ["admin", "users", "superadmin", "penjual"])->nullable()->default('users');
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('images')->nullable();

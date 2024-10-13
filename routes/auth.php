@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\GithubController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialiteController;
 
@@ -62,13 +63,27 @@ Route::middleware('auth')->group(function () {
 
 Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])
     ->middleware(['guest'])
-    ->name('redirect');
+    ->name('google.redirect');
 
 Route::get('login/google/callback', [SocialiteController::class, 'callback'])
     ->middleware(['guest'])
     ->name('callback');
 
+
+
+
 // Untuk logout
 Route::post('logout', [SocialiteController::class, 'logout'])
     ->middleware(['auth'])
     ->name('logout');
+
+
+
+// login github
+
+Route::get('auth/github/redirect', [GithubController::class, 'redirect'])
+    ->middleware(['guest'])
+    ->name('github.redirect');
+
+Route::get('auth/github/callback', [GithubController::class, 'callback'])
+    ->middleware(['guest']);

@@ -32,8 +32,8 @@ return [
     ],
 
     'github' => [
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'client_id' => 'Ov23liMFQjS7Bpogie78',
+        'client_secret' => '64430c08dc7876543a82194937d675885744f343',
         'redirect' => env('GITHUB_CLIENT_REDIRECT'),
     ],
 
