@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('penjual_id');
             $table->date('tanggal');
             $table->string('status')->default('pending');
             $table->integer('jumlah_harga');

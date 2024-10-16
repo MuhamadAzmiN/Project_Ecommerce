@@ -1,17 +1,17 @@
 @extends('layout.admin-section.master')
-@section('title', 'Daftar Kategori')
-@section('nav-title', 'Daftar Kategori')
+@section('title', 'Daftar Users')
+@section('nav-title', 'Daftar Users')
 @section('content')
     <div class="p-6">
         <div class="relative overflow-x-auto sm:rounded-lg">
             <div
                 class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
                 <div>
-                    <a href="{{ route('createBarang') }}"
+                    {{-- <a href="{{ route('createUser') }}"
                         class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                         type="button">
-                        Tambah Barang
-                    </a>
+                        Tambah User
+                    </a> --}}
                 </div>
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
@@ -22,11 +22,11 @@
                                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
-                    <form action="{{ route('daftarBarang') }}" method="GET">
+                    <form action="{{ route('daftarUser') }}" method="GET">
                         @csrf
                         <input type="text" name="search"
                             class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Cari kategori...">
+                            placeholder="Cari user...">
                     </form>
                 </div>
             </div>
@@ -37,16 +37,13 @@
                             No
                         </th>
                         <th scope="col" class="p-4">
-                            Nama Kategori
+                            Nama
                         </th>
                         <th scope="col" class="p-4">
-                            Harga
+                            Email
                         </th>
                         <th scope="col" class="p-4">
-                            image
-                        </th>
-                        <th scope="col" class="p-4">
-                            Keterangan
+                            Role
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Action
@@ -54,41 +51,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($barang as $index => $item)
+                    @foreach ($users as $index => $user)
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="px-6 py-4">
-                                {{ $barang->firstItem() + $index }}
-                                {{-- {{ $loop->iteration  }} --}}
+                                {{ $users->firstItem() + $index }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->nama_barang }}
+                                {{ $user->name }}
                             </td>
                             <td class="px-6 py-4">
-                                Rp{{ number_format($item->harga, '0', ',', '.') }}
-                            </td>
-                            <td class="px-6 py-4">                                    
-                                @if (substr($item->image, 0, 5) !== 'https')
-                                    <img src="{{ asset('storage/' . $item->image) }}" width="400px" height="400px">
-                                @elseif (substr($item->image, 0, 5) === 'https')
-                                    <img src="{{ $item->image }}" width="400px" height="400px">
-                                @endif
-
-                                  
+                                {{ $user->email }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $item->keterangan }}
+                                {{ $user->role }} <!-- Pastikan ada kolom role atau sesuaikan dengan field yang ada di tabel -->
                             </td>
                             <td class="px-6 py-4 flex gap-2">
-                                <a href="{{ route('editBarang', $item->id) }}"
+                                <a href="{{ route('editUser', $user->id) }}"
                                     class="rounded bg-yellow-300 p-2 text-black hover:bg-yellow-400 hover:text-slate-100">edit</a>
-                            <form action="{{ route('destroyBarang', $item->id) }}" method="POST">
+                            <form action="{{ route('destroyUser', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
                                     onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
                                     class="rounded bg-red-500 p-2 text-white hover:bg-red-400 hover:text-slate-100">hapus</button>
-
                             </form>
                         </td>
                         </tr>
@@ -97,8 +83,7 @@
             </table>
         </div>
         <div class="paginate mt-4">
-
-            {{ $barang->links() }}
+            {{ $users->links() }}
         </div>
     </div>
 @endsection

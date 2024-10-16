@@ -50,8 +50,12 @@
                 </button>
                 <div class="absolute w-80 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 max-h-96 overflow-y-auto" id="cart">
                     @foreach ($barang_pesanan as $item)
-                    <div class="flex items-center mb-2">
-                        <img class="w-10 h-10 mr-4" src="{{ $item->barang->image }}" alt="{{ $item->barang->nama_barang }}">
+                            <div class="flex items-center mb-2">
+                                @if (substr($item->barang->image, 0, 5) !== 'https')
+                                <img class="w-10 h-10 mr-4" id="existingImagePreview" src="{{ asset('storage/' . $item->barang->image) }}" width="400px" height="400px">
+                                @elseif (substr($item->barang->image, 0, 5) === 'https')
+                                <img class="w-10 h-10 mr-4"  src="{{ $item->barang->image }}" width="400px" height="400px">
+                            @endif
                         <a href="#" class="block text-sm text-gray-700 hover:bg-gray-100">{{ $item->barang->nama_barang }}</a>
                     </div>
                     @endforeach

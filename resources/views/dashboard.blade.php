@@ -7,36 +7,61 @@
 
         @if (!auth()->check()) <!-- Cek apakah pengguna belum login -->
         <div id="login-popup" tabindex="-1" class="bg-black/50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 h-full items-center justify-center flex hidden">
-          <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-              <div class="relative bg-white rounded-lg shadow">
-                  <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close">
-                      <svg aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                      </svg>
-                      <span class="sr-only">Close popup</span>
-                  </button>
-  
-                  <div class="p-5">
-                      <div class="text-center">
-                          <p class="mb-3 text-2xl font-semibold leading-5 text-slate-900">Login to your account</p>
-                          <p class="mt-2 text-sm leading-4 text-slate-600">You must be logged in to perform this action.</p>
-                      </div>
-  
-                      <div class="mt-7 flex flex-col gap-2">
-                          <button id="github" onclick="github()" class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1">
-                              <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" class="h-[18px] w-[18px]"> Continue with GitHub
-                          </button>
-                          <button onclick="google()" class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1">
-                              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-[18px] w-[18px]"> Continue with Google
-                          </button>
-                      </div>
-  
-                    
-                  </div>
-              </div>
-          </div>
-      </div>
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative bg-white rounded-lg shadow">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close">
+                <svg aria-hidden="true" class="w-5 h-5" fill="#c6c7c7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Close popup</span>
+            </button>
+
+            <div class="p-5">
+                <div class="text-center">
+                <p class="mb-3 text-2xl font-semibold leading-5 text-slate-900">Login to your account</p>
+                <p class="mt-2 text-sm leading-4 text-slate-600">You must be logged in to perform this action.</p>
+                </div>
+
+                <!-- Login with Social Accounts -->
+                <div class="mt-7 flex flex-col gap-2">
+                <button id="github" onclick="github()" class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1">
+                    <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" class="h-[18px] w-[18px]"> Continue with GitHub
+                </button>
+                <button onclick="google()" class="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-[18px] w-[18px]"> Continue with Google
+                </button>
+                </div>
+
+                <!-- Manual Login Form -->
+                <form method="POST" action="{{ route('login') }}" class="mt-5">
+                @csrf
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required autofocus>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                    <input id="remember_me" name="remember" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <label for="remember_me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+                    </div>
+                    <div class="text-sm">
+                    <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Login</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
         @endif
+
         @if(!auth()->user())
 
         <div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -55,6 +80,7 @@
                 </div>
             </div>
         </div>
+        
 
        
         @endif
@@ -69,6 +95,16 @@
                     confirmButtonText: 'Ok'
                 });
             </script>
+        @endif
+
+
+        @if (session('success'))
+        <div role="alert" id="alert-success" class="mb-4 relative flex w-full p-3 text-sm text-white bg-green-600 rounded-md">
+            {{ session('success') }} Selamat Berbelanja Ditoko Kami
+            <button onclick="CloseAlert()" class="flex items-center justify-center transition-all w-8 h-8 rounded-md text-white hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
         @endif
 
     <div id="default-carousel" class="relative h-56 overflow-hidden md:h-96 mt-6" data-carousel="static">
@@ -157,7 +193,11 @@
                 @foreach ($barang as $item)
                 <div class="relative group">
                     <div class="w-64 h-64 overflow-hidden">
-                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="{{ $item->image }}" alt="Gambar Produk" />
+                        @if (substr($item->image, 0, 5) !== 'https')
+                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" id="existingImagePreview" src="{{ asset('storage/' . $item->image) }}" width="400px" height="400px">
+                        @elseif (substr($item->image, 0, 5) === 'https')
+                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"  src="{{ $item->image }}" width="400px" height="400px">
+                    @endif
                     </div>
                     <div class="absolute left-3 top-3">
                         <p class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-white rounded-full">New</p>
@@ -215,42 +255,9 @@
     
     
     </section>
-<div class="w-full flex justify-center items-center bg-white">
-    <div class="w-max flex gap-[1px] items-center justify-evenly p-5 my-3 overflow-x-auto">
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2 border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner  duration-300">
-                Makanan
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Minuman
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Snack
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Paket Hemat
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Promo
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Roti & Kue
-        </a>
-        <a href="#" class="w-fit text-nowrap h-[60%] px-5 py-2 m-2  border-[1px] border-gray-400 font-bold border-opacity-10 inner-2 shadow-md rounded-2xl bg-gradient-to-br from-sky-100 to-white transform hover:-translate-y-1  hover:shadow-inner duration-300">
-                Produk Sehat
-        </a>
-    </div>
-</div>
 
-<div class="w-full flex justify-center items-center bg-white rounded">
-    <div class="relative w-[50%] h-[500px] bg-cover bg-no-repeat rounded-xl max-sm:w-[90%] shadow-2xl"
-        style="background-image: url('https://ppdb.smkwikrama.sch.id/assets/landing%20page/images/Gedung.jpg');">
-        <div class="absolute inset-0 flex flex-col justify-center items-start w-[80%] m-auto text-left backdrop-blur-sm h-fit rounded-md p-3">
-            <h6 class="text-white text-4xl font-bold m-5 max-sm:text-sm ">kategori</h6>
-            <h1 class="text-white text-xl font-light m-5 max-sm:text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed debitis suscipit a assumenda nemo excepturi nobis, deserunt et itaque dolores?</h1>
-            <a href="" class="bg-white p-3 rounded m-5 md:text-sm max-sm:m-auto">Buy Now</a>
-        </div>
-    </div>
-</div>
+
+
 
     <!-- Trending Products -->
 
@@ -532,8 +539,9 @@
     @push('script')
     <script>
 
-const loginPopup = document.getElementById('login-popup');
+        const loginPopup = document.getElementById('login-popup');
         const closePopupButton = document.querySelector('.popup-close');
+        
 
         // Fungsi untuk menampilkan popup
         function openPopup() {
@@ -567,6 +575,16 @@ const loginPopup = document.getElementById('login-popup');
 
         // Membuka popup saat halaman dimuat
         window.addEventListener('DOMContentLoaded', openPopup);
+
+
+
+        function CloseAlert() {
+            
+            document.getElementById('alert-success').classList.add('hidden');
+            
+        }
+
+        
     </script>
     @endpush
 

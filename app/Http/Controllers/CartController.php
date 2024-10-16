@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\barang;
 use App\Models\pesanan;
 use App\Models\RiwayatPesanan;
@@ -18,11 +17,15 @@ class CartController extends Controller
     {
         
         if(auth()->user()){
-            $barang = barang::find(auth()->user()->id);
+            $barang = Barang::where('id', $barang_id)->first();
+            
             $totalHarga = $request->quantity * $request->harga;
+
+            
             
             pesanan::create([
                 'user_id' => auth()->id(),
+                'penjual_id' => $barang->penjual_id,
                 'barang_id' => $barang_id,
                 'jumlah_harga' => $totalHarga,
                 'tanggal' => now(),
@@ -30,13 +33,10 @@ class CartController extends Controller
                 
             ]);
         }else {
-            return redirect()->back()->with("danger", 'anda harus login terlebih dahulu');
+            return redirect()->back()->with("danger", 'Login Terlebih dahulu');
         }  
         return redirect()->back()->with('success', 'Item Berhasil dimasukan ke cart');
     }
-
-
-    
 
     public function cart()
 {

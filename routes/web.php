@@ -47,4 +47,37 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+// halaman admin
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SuperAdminController;
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    // pesanan
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::get('/pesanan', [AdminController::class, 'daftarPesanan'])->name('daftarPesanan');
+    Route::delete('/pesanan/{id}', [AdminController::class, 'destroyPesanan'])->name('destroyPesanan');
+    Route::put('/pesanan/{id}', [AdminController::class, 'updatePesanan'])->name('updatePesanan');
+    // barang
+    Route::get('/barang', [AdminController::class, 'daftarBarang'])->name('daftarBarang');
+    Route::delete('/barang/{id}', [AdminController::class, 'destroyBarang'])->name('destroyBarang');
+    Route::get('/barang/create', [AdminController::class, 'createBarang'])->name('createBarang');
+    Route::get('/barang/edit/{id}', [AdminController::class, 'editBarang'])->name('editBarang');
+    Route::post('/barang/create', [AdminController::class, 'storeBarang'])->name('storeBarang');
+    Route::put('/barang/{id}', [AdminController::class, 'updateBarang'])->name('updateBarang');
+});
+
+// Super admin
+Route::prefix('SuperAdmin')->middleware('auth', 'superAdmin')->group(function () {
+    Route::controller(SuperAdminController::class)->group(function () {
+        Route::get('/daftarUser', 'daftarUser')->name('daftarUser');
+        Route::put('/user/{id}', [AdminController::class, 'userUpdate'])->name('userUpdate');
+        Route::delete('/daftarUser/{id}', 'destroyUser')->name('destroyUser');
+        Route::get('editUser/{id}', 'editUser')->name('editUser');
+        Route::get('/daftarBarangAll', 'daftarBarangAll')->name('daftarBarangAll');
+    });
+});
+
+
+
 require __DIR__.'/auth.php';

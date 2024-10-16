@@ -57,7 +57,7 @@ class SocialiteController extends Controller
         auth('web')->login($userFromDatabase);
         session()->regenerate();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Login successful!');
     }
 
     public function logout(Request $request)
@@ -66,6 +66,6 @@ class SocialiteController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Logout successful!');
     }
 }

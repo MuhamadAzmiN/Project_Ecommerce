@@ -75,8 +75,11 @@ class=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full 
             <div
                 class="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6  border-b border-gray-200 group">
                 <div class="w-full md:max-w-[126px]">
-                    <img src="{{ $item->barang->image }}" alt="perfume bottle image"
-                        class="mx-auto rounded-xl">
+                        @if (substr($item->barang->image, 0, 5) !== 'https')
+                        <img class="mx-auto rounded-xl" id="existingImagePreview" src="{{ asset('storage/' . $item->barang->image) }}" width="400px" height="400px">
+                        @elseif (substr($item->barang->image, 0, 5) === 'https')
+                        <img class="mx-auto rounded-xl"  src="{{ $item->barang->image }}" width="400px" height="400px">
+                    @endif
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 w-full">

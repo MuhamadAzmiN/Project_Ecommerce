@@ -24,13 +24,11 @@ class GithubController extends Controller
         }
     
         // Ambil user dari database berdasarkan google user id
-        $userFromDatabase = User::where('google_id', $userFromGoogle->getId())->first();
+        $userFromDatabase = User::where('github_id', $userFromGoogle->getId())->first();
     
         // Jika tidak ada user, maka buat user baru
         if (!$userFromDatabase) {
 
-
-            
             // Download image dari Google
             $avatarUrl = $userFromGoogle->getAvatar();
             $avatarContents = file_get_contents($avatarUrl);
@@ -51,14 +49,14 @@ class GithubController extends Controller
             auth('web')->login($newUser);
             session()->regenerate();
     
-            return redirect('/');
+            return redirect('/')->with('success', 'Login Success');
         }
 
         // Jika ada user langsung login saja
         auth('web')->login($userFromDatabase);
         session()->regenerate();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Login Success');
     }
 
     public function logout(Request $request)
@@ -67,6 +65,6 @@ class GithubController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Logout successful!');
     }
 }

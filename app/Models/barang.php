@@ -11,14 +11,27 @@ class Barang extends Model
     protected $guarded = ['id'];
 
     // Relasi dengan model Pesanan
-    public function pesanan()
-    {
-        return $this->hasMany(Pesanan::class, 'barang_id');
-    }
+   
 
     public function riwayatPesanans()
     {
         return $this->hasMany(RiwayatPesanan::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function penjual()
+    {
+        return $this->belongsTo(User::class, 'penjual_id');
+    }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
     }
 
 

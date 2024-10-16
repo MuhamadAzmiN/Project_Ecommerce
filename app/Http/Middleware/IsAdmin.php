@@ -16,7 +16,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(auth()->user()->role !== 'admin') {
+        if(auth()->user()->role !== 'admin' && auth()->user()->role !== 'superadmin') {
            return abort(404);
         }
         return $next($request);

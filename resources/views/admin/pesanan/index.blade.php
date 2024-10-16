@@ -14,18 +14,11 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="itemName" class="block text-sm font-medium text-gray-700">Select Item</label>
-                <select id="itemName" name="itemName" class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm">
-                    <option id="defaultOption" value="">-- Choose an Item --</option>  <!-- Set default option -->
-                    @foreach($barang as $bar)
-                        <option value="{{ $bar->id }}">{{ $bar->nama_barang }}</option>
-                    @endforeach
-                </select>
+                <label for="itemPrice" class="block text-sm font-medium text-gray-700">Harga</label>
+                <input name="itemPrice" type="number" id="itemPrice" class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm">
+                <span id="formattedPrice" class="block text-sm font-medium text-gray-500 mt-1"></span>
             </div>
-       
-            
         
-
         <!-- Input for Item Quantity -->
         <div class="mb-4">
             <label for="itemQuantity" class="block text-sm font-medium text-gray-700">Quantity</label>
@@ -48,9 +41,17 @@
     
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function ShowModal(id, name, quantity, barang_id) {
-    
-    $('#defaultOption').text(name);
+function ShowModal(id, jumlah_harga, quantity, barang_id) {
+    jumlah_harga = Number(jumlah_harga);
+    let formattedHarga = jumlah_harga.toLocaleString('id-ID', { 
+        style: 'currency', 
+        currency: 'IDR', 
+        minimumFractionDigits: 0, 
+        maximumFractionDigits: 0 
+    });
+
+    $('#itemPrice').val(jumlah_harga); // Tetap menggunakan angka untuk input type="number"
+    $('#formattedPrice').text(formattedHarga); // Menampilkan format Rupiah di span terpisah
     $('#itemName').val(barang_id);
     $('#itemQuantity').val(quantity);
 
@@ -60,9 +61,6 @@ function ShowModal(id, name, quantity, barang_id) {
     $('#editModal').removeClass('hidden');
 }
 
-$('#closeModal').on('click', function() {
-    $('#editModal').addClass('hidden');
-});
 </script>
 
     

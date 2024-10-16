@@ -10,20 +10,22 @@ class PesananSearch extends Component
     public $search = '';
     public function render()
     {
+        // Ambil pesanan berdasarkan penjual_id dan jika ada pencarian
         $pesanan = Pesanan::with(['user', 'barang'])
-        ->when($this->search, function ($query) {
-            $query->whereHas('user', function ($q) {
-                $q->where('name', 'like', '%' . $this->search . '%');
+            ->whereHas('barang', function($query) {
+                $query->where('penjual_id', auth()->user()->id);
             })
-            ->orWhereHas('barang', function ($q) {
-                $q->where('nama_barang', 'like', '%' . $this->search . '%');
-            });
-        })
-        ->get();
-
-
-        $barang = Barang::all();
+            ->when($this->search, function ($query) {
+                $query->whereHas('user', function ($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%');
+                })
+                ->orWhereHas('barang', function ($q) {
+                    $q->where('nama_barang', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->get();
         
-        return view('livewire.pesanan-search', compact('pesanan', 'barang'));
+        return view('livewire.pesanan-search', compact('pesanan'));
     }
+    
 }

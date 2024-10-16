@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,20 +15,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // data azmi
-        // \App\Models\User::factory()->create([
-        //     "name" => "azmi",
-        //     "email" => "azmi@gmail.com",
-        //     "role" => "admin",
-        //     "password" => bcrypt('password')
-            
-        // ]);
+       // Membuat pengguna pertama
+        $this->call(UserSeeder::class);
 
-        // \App\Models\User::factory()->create([
-        //     "name" => "asep",
-        //     "email" => "asep@gmail.com",
-        //     "password" => bcrypt('password')
-            
-        // ]);
 
 
         $this->call(BarangSeeder::class);

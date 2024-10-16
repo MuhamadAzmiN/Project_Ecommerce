@@ -108,7 +108,12 @@
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                    <img class="w-full h-96 object-cover dark:hidden" src="{{ $barang->image }}" alt="iMac front view" />
+                    
+                    @if (substr($barang->image, 0, 5) !== 'https')
+                    <img class="w-full h-96 object-cover dark:hidden" id="existingImagePreview" src="{{ asset('storage/' . $barang->image) }}" width="400px" height="400px">
+                    @elseif (substr($barang->image, 0, 5) === 'https')
+                    <img class="w-full h-96 object-cover dark:hidden"  src="{{ $barang->image }}" width="400px" height="400px">
+                    @endif
                     <img class="w-full h-96 object-cover hidden dark:block" src="{{ $barang->image }}" alt="iMac front view dark mode" />
                 </div>
                 
@@ -246,7 +251,11 @@
                 @foreach ($semua_barang as $item)
                 <div class="relative group">
                     <div class="w-64 h-64 overflow-hidden">
-                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="{{ $item->image }}" alt="Gambar Produk" />
+                    @if (substr($item->image, 0, 5) !== 'https')
+                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" id="existingImagePreview" src="{{ asset('storage/' . $item->image) }}" width="400px" height="400px">
+                        @elseif (substr($item->image, 0, 5) === 'https')
+                        <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"  src="{{ $item->image }}" width="400px" height="400px">
+                    @endif
                     </div>
                     <div class="absolute left-3 top-3">
                         <p class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-white rounded-full">New</p>
