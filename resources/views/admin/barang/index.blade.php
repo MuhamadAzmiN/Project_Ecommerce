@@ -33,68 +33,62 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="p-4">
-                            No
-                        </th>
-                        <th scope="col" class="p-4">
-                            Nama Kategori
-                        </th>
-                        <th scope="col" class="p-4">
-                            Harga
-                        </th>
-                        <th scope="col" class="p-4">
-                            image
-                        </th>
-                        <th scope="col" class="p-4">
-                            Keterangan
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
+                        <th scope="col" class="p-4">No</th>
+                        <th scope="col" class="p-4">Nama Kategori</th>
+                        <th scope="col" class="p-4">Harga</th>
+                        <th scope="col" class="p-4">Image</th>
+                        <th scope="col" class="p-4">Keterangan</th>
+                        <th scope="col" class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($barang as $index => $item)
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4">
-                                {{ $barang->firstItem() + $index }}
-                                {{-- {{ $loop->iteration  }} --}}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $item->nama_barang }}
-                            </td>
-                            <td class="px-6 py-4">
-                                Rp{{ number_format($item->harga, '0', ',', '.') }}
-                            </td>
-                            <td class="px-6 py-4">                                    
-                                @if (substr($item->image, 0, 5) !== 'https')
-                                    <img src="{{ asset('storage/' . $item->image) }}" width="400px" height="400px">
-                                @elseif (substr($item->image, 0, 5) === 'https')
-                                    <img src="{{ $item->image }}" width="400px" height="400px">
-                                @endif
-
-                                  
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $item->keterangan }}
-                            </td>
-                            <td class="px-6 py-4 flex gap-2">
-                                <a href="{{ route('editBarang', $item->id) }}"
-                                    class="rounded bg-yellow-300 p-2 text-black hover:bg-yellow-400 hover:text-slate-100">edit</a>
-                            <form action="{{ route('destroyBarang', $item->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
-                                    class="rounded bg-red-500 p-2 text-white hover:bg-red-400 hover:text-slate-100">hapus</button>
-
-                            </form>
-                        </td>
+                    @if ($barang->count() > 0)
+                        @foreach ($barang as $index => $item)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    {{ $barang->firstItem() + $index }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->nama_barang }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    Rp{{ number_format($item->harga, '0', ',', '.') }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if (substr($item->image, 0, 5) !== 'https')
+                                        <img src="{{ asset('storage/' . $item->image) }}" width="150px" height="150px">
+                                    @else
+                                        <img src="{{ $item->image }}" width="150px" height="150px">
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->keterangan }}
+                                </td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <a href="{{ route('editBarang', $item->id) }}"
+                                        class="rounded bg-yellow-300 p-2 text-black hover:bg-yellow-400 hover:text-slate-100">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('destroyBarang', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                            class="rounded bg-red-500 p-2 text-white hover:bg-red-400 hover:text-slate-100">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="6" class="text-center p-4">Tidak ada barang</td>
                         </tr>
-                    @endforeach 
+                    @endif
                 </tbody>
             </table>
+            
         </div>
         <div class="paginate mt-4">
 

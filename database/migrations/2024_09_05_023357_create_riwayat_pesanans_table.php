@@ -1,4 +1,4 @@
-<?php
+1<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('penjual_id');
             $table->string('nama_pemesan');
             $table->string('email');
             $table->string('metode_pembayaran');
             $table->string('total_harga'); 
-            $table->integer('jumlah_barang')->default(1); 
+            $table->integer('jumlah_barang')->nullable(); 
         });
     }
 

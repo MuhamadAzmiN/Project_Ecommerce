@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/detail/{id}', [CartController::class, 'detail'])->name('detail');
 Route::post('/cart/{barang}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/checkout', [CartController::class, 'checkoutLangsung'])->name('checkoutLangsung');
+Route::post('/checkout/{id}', [CartController::class, 'checkoutLangsung'])->name('checkoutLangsung');
 Route::post('/cartCheckout', [CartController::class, 'cartCheckout'])->name('cartCheckout');
 Route::get('/service', function() {
     return view('/service',[
@@ -65,13 +65,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/barang/edit/{id}', [AdminController::class, 'editBarang'])->name('editBarang');
     Route::post('/barang/create', [AdminController::class, 'storeBarang'])->name('storeBarang');
     Route::put('/barang/{id}', [AdminController::class, 'updateBarang'])->name('updateBarang');
+    
 });
 
 // Super admin
 Route::prefix('SuperAdmin')->middleware('auth', 'superAdmin')->group(function () {
     Route::controller(SuperAdminController::class)->group(function () {
         Route::get('/daftarUser', 'daftarUser')->name('daftarUser');
-        Route::put('/user/{id}', [AdminController::class, 'userUpdate'])->name('userUpdate');
+        Route::put('/user/{id}', [SuperAdminController::class, 'userUpdate'])->name('userUpdate');
         Route::delete('/daftarUser/{id}', 'destroyUser')->name('destroyUser');
         Route::get('editUser/{id}', 'editUser')->name('editUser');
         Route::get('/daftarBarangAll', 'daftarBarangAll')->name('daftarBarangAll');

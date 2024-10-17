@@ -45,10 +45,17 @@
                             {{ $barang_pesanan->count()  }}
                         </div>
                     </span>
-                        
+                    @else
+                    @if(auth()->user())
+                    <span class="absolute top-0 right-0 -mt-1 -mr-1">
+                        <div class="inline-flex items-center justify-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                            0
+                        </div>
+                    @endif
                     @endif
                 </button>
                 <div class="absolute w-80 bg-white right-0 translate-x-1/2 rounded-md z-50 hidden shadow-md p-3 mt-5 max-h-96 overflow-y-auto" id="cart">
+                    @if($barang_pesanan->count() > 0)
                     @foreach ($barang_pesanan as $item)
                             <div class="flex items-center mb-2">
                                 @if (substr($item->barang->image, 0, 5) !== 'https')
@@ -59,6 +66,11 @@
                         <a href="#" class="block text-sm text-gray-700 hover:bg-gray-100">{{ $item->barang->nama_barang }}</a>
                     </div>
                     @endforeach
+                    @else
+                    <div class="flex items-center mb-2">
+                        <a href="#" class="block text-sm text-gray-700 hover:bg-gray-100">Tidak ada pesanan</a>
+                    </div>
+                    @endif
                 </div>
                 
             </div>

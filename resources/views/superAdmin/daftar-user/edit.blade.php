@@ -1,4 +1,4 @@
-@extends('layout.admin-section.master')
+@extends('layout-superAdmin.admin-section.master')
 @section('title', 'Edit User')
 @section('nav-title', 'Edit User')
 @section('content')

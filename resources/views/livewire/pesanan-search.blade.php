@@ -47,11 +47,13 @@
                         <td class="px-6 py-4">Rp.{{ number_format($item->jumlah_harga, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">{{ $item->jumlah_barang }} PCS</td>
                         <td class="px-6 py-4 flex items-center gap-2 mt-5">
-                            
+                           
+                           
                             <a onclick="ShowModal({{ $item->id }}, {{ $item->jumlah_harga }}, {{ $item->jumlah_barang }}, {{ $item->barang->id }})"
                                 class="rounded bg-yellow-300 px-4 py-2 text-black hover:bg-yellow-400 hover:text-white text-center">
                                 Edit
                              </a>
+                          
                              <form action="{{ route('destroyPesanan', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

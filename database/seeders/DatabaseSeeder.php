@@ -1,6 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\pesanan;
+use App\Models\RiwayatPesanan;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +21,8 @@ class DatabaseSeeder extends Seeder
        // Membuat pengguna pertama
         $this->call(UserSeeder::class);
 
+
+       
 
 
         $this->call(BarangSeeder::class);
