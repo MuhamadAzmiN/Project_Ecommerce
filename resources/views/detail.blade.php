@@ -170,7 +170,7 @@
                                     <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
                         
                                     <div class="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
-                                        <form class="mt-4" action="{{ route('checkoutLangsung') }}" method="POST">
+                                        <form class="mt-4" action="{{ route('checkoutLangsung', $barang->id) }}" method="POST">
                                             @csrf
                                             <!-- Nama Barang -->
                                             <label for="item-name" class="text-sm text-gray-700 dark:text-gray-200">Nama Barang</label>

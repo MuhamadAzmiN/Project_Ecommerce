@@ -5,6 +5,7 @@ use App\Models\barang;
 use App\Models\pesanan;
 use App\Models\RiwayatPesanan;
 use Illuminate\Http\Request;
+use App\Models\RiwayatPesananDetail;
 
 class CartController extends Controller
 {
@@ -46,7 +47,6 @@ class CartController extends Controller
     $barang_pesanan = Pesanan::with('barang')
         ->where('user_id', $userId)
         ->get();
-    
     // Menghitung total harga dan jumlah pesanan
     $barang = barang::find($userId);
     $totalJumlahHarga = $barang_pesanan->sum('jumlah_harga');
@@ -77,7 +77,7 @@ class CartController extends Controller
 }
 
 
-public function checkoutLangsung(Request $request)
+public function checkoutLangsung(Request $request, $id)
 {
     // dd($request->all());
     $validated = $request->validate([
@@ -85,10 +85,13 @@ public function checkoutLangsung(Request $request)
         'item_price' => 'required|numeric',
         'item_quantity' => 'required|integer|min:1',
         'payment_method' => 'required|string',
-        'uang' => 'required|numeric'
+        'uang' => 'required|numeric',
+        
     ]);
 
     $totalHarga = $request->item_quantity * $request->item_price;
+    $barang = Barang::find($id);
+   
 
     if (auth()->user()) {
         if ($request->uang < $totalHarga) {
@@ -102,7 +105,8 @@ public function checkoutLangsung(Request $request)
             'nama_pemesan' => $request->item_name,
             'email' => auth()->user()->email,
             'metode_pembayaran' => $request->payment_method,
-            'jumlah_barang' => $request->item_quantity
+            'jumlah_barang' => $request->item_quantity,
+            'penjual_id' => $barang->penjual_id
         ]);
 
         // Check if the order was created successfully
@@ -168,8 +172,7 @@ public function detail($id)
 
 
 
-public function cartCheckout(Request $request)
-{
+public function cartCheckout(Request $request) {
     // Cek apakah user sudah login
     if (!auth()->check()) {
         return redirect()->back()->with("danger", 'Anda harus login terlebih dahulu');
@@ -178,26 +181,40 @@ public function cartCheckout(Request $request)
     $userId = auth()->id();
 
     // Hitung total harga dari pesanan user
-    $totalHarga = Pesanan::where('user_id', $userId)
-        ->sum('jumlah_harga');
-    $barang = Pesanan::where('user_id', $userId)
-        ->get();
+    $totalHarga = Pesanan::where('user_id', $userId)->sum('jumlah_harga');
+    $pesanan = Pesanan::where('user_id', $userId)->get();
 
     // Pastikan cart tidak kosong
-    if (Pesanan::where('user_id', $userId)->count() > 0) {
+    if ($pesanan->count() > 0) {
         // Cek apakah uang mencukupi
         if ($request->uang < $totalHarga) {
             return redirect()->back()->with('danger', 'Uang anda tidak mencukupi');
         }
 
-        // Buat riwayat pesanan
-        RiwayatPesanan::create([
-            'user_id' => $userId,
-            'total_harga' => $totalHarga,
-            'nama_pemesan' => auth()->user()->name,
-            'email' => auth()->user()->email,
-            'metode_pembayaran' => $request->payment_method,
-        ]);
+        // Buat riwayat pesanan untuk setiap penjual
+        foreach ($pesanan as $item) {
+            // Ambil penjual_id dari barang
+            $penjualId = $item->barang->penjual_id;
+
+            $riwayat = RiwayatPesanan::create([
+                'user_id' => $userId,
+                'total_harga' => $totalHarga,
+                'nama_pemesan' => auth()->user()->name,
+                'email' => auth()->user()->email,
+                'metode_pembayaran' => $request->payment_method,
+                'jumlah_barang' => $pesanan->count(),
+                'penjual_id' => $penjualId, // Menggunakan penjual_id dari barang
+            ]);
+
+            // Simpan detail pesanan
+            RiwayatPesananDetail::create([
+                'riwayat_pesanan_id' => $riwayat->id,
+                'barang_id' => $item->barang_id,
+                'nama_barang' => $item->barang->nama_barang,
+                'jumlah' => $item->jumlah_barang,
+                'harga' => $item->jumlah_harga,
+            ]);
+        }
 
         // Simpan detail pesanan ke dalam session (jika diperlukan)
         session()->put('last_checkout', [
@@ -206,21 +223,19 @@ public function cartCheckout(Request $request)
             'item_price' => $request->item_price,
             'item_quantity' => $request->item_quantity,
             'total_harga' => $totalHarga,
-            'uang' => $request->uang
+            'uang' => $request->uang,
         ]);
 
         // Hapus semua barang dari cart (tabel `Pesanan`) setelah checkout
         Pesanan::where('user_id', $userId)->delete();
 
-        return redirect()->back()->with('successCheckout', 'Pesanan Berhasil dibuat dan semua barang di cart telah dihapus.');
+        return redirect()->back()->with('successCheckout', 'Pesanan berhasil dibuat dan semua barang di cart telah dihapus.');
     } else {
         // Jika cart kosong
         return redirect()->back()->with("danger", 'Cart anda kosong');
     }
 }
 
-
-    
 
 
 }

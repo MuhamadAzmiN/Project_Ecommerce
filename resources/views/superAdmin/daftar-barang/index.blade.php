@@ -1,4 +1,4 @@
-@extends('layout.admin-section.master')
+@extends('layout-superAdmin.admin-section.master')
 @section('title', 'Daftar Kategori')
 @section('nav-title', 'Daftar Kategori')
 @section('content')

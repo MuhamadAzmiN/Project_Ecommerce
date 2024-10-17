@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\User;
 use App\Models\pesanan;
+use App\Models\RiwayatPesanan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,18 @@ class AdminController extends Controller
             $query->where('penjual_id', auth()->user()->id);
         })
         ->get();
+
+
+        $jumlah_pembelian = Pesanan::where('penjual_id', auth()->user()->id)->get();
+        $riwayat = RiwayatPesanan::where('penjual_id', auth()->user()->id)->sum('total_harga');
+        
+        // foreach ($riwayat as $pesanan) {
+           
+        // }
         
 
         $user = User::count();
-        return view('admin.index',compact('barang', 'pesanan', 'user'));
+        return view('admin.index',compact('barang', 'pesanan', 'user', 'jumlah_pembelian', 'riwayat'));
     }
     // Daftar Pesanan
     public function daftarPesanan() 
@@ -84,8 +93,10 @@ class AdminController extends Controller
     $barang = Barang::where('penjual_id', auth()->user()->id)
                 ->when($inputSearch, function ($query, $search) {
                     return $query->where('nama_barang', 'like', "%{$search}%");
-                })
-                ->paginate(10);
+                })->paginate(5)
+                ;
+
+    
 
     return view('admin.barang.index', compact('barang'));
     }
@@ -178,6 +189,11 @@ class AdminController extends Controller
     // Redirect kembali dengan pesan sukses
     return redirect()->route('daftarBarang')->with('success', 'Barang Berhasil diubah');
 }
+
+
+
+
+    
 
     
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Kelola | @yield('title')</title>
+    <title>Portal Admin | @yield('title')</title>
 
     <!-- Favicon --->
     <link rel="icon" href="{{ url('/images/favicon.png') }}">
@@ -27,13 +27,13 @@
 
 <body class="text-gray-800">
     <!-- SIDEBAR -->
-    @include('layout.admin-section.sidebar')
+    @include('layout-superAdmin.admin-section.sidebar')
     <!-- END OF SIDEBAR -->
 
     <!-- MAIN CONTENT -->
     <main class="w-[calc(100%-256px)] ml-64">
         <!-- NAVBAR -->
-        @include('layout.admin-section.navbar')
+        @include('layout-superAdmin.admin-section.navbar')
         <!-- END OF NAVBAR -->
 
         <!-- MAIN SECTION -->

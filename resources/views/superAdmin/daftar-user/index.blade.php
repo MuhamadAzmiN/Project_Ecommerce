@@ -1,4 +1,4 @@
-@extends('layout.admin-section.master')
+@extends('layout-superAdmin.admin-section.master')
 @section('title', 'Daftar Users')
 @section('nav-title', 'Daftar Users')
 @section('content')

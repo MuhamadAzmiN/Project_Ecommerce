@@ -91,7 +91,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Berhasil',
-                    text: 'Selamat Datang {{ auth()->user()->name }}',
+                    text: '',
                     confirmButtonText: 'Ok'
                 });
             </script>

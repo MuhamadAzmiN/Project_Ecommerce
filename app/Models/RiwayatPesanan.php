@@ -14,6 +14,8 @@ class RiwayatPesanan extends Model
         'email',
         'metode_pembayaran',
         'total_harga',
+        'penjual_id',
+        'jumlah_barang'
     ];
 
 
